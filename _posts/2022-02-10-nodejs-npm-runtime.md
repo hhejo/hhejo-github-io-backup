@@ -1,12 +1,12 @@
 ---
-title:  "Node.js와 npm, runtime"
+title:  "Node.js와 npm, Runtime"
 date: 2022-02-10
 last_modified_at: 2022-02-10
-excerpt: "Node.js와 npm, runtime이란?"
+excerpt: "Node.js와 npm, Runtime이란?"
 categories:
   - JavaScript
 tags:
-  - [Node.js, npm, JavaScript]
+  - [Node.js, npm, JavaScript, Runtime]
 ---
 
 ---
