@@ -1,8 +1,8 @@
 ---
-title:  "Effects란? Side Effect와 useEffect 훅"
+title:  "Effects란? Side Effects와 useEffect 훅"
 date: 2022-02-20
-last_modified_at: 2022-02-20
-excerpt: "Effects, Side Effects, useEffect, clean-up function"
+last_modified_at: 2022-02-21
+excerpt: "Effects, Side Effects, useEffect, Clean-up function"
 categories:
   - React
 tags:
@@ -13,25 +13,26 @@ tags:
 
 <br>
 
-# Effect (Side Effect)
+# Effects & Side Effects
+
+## Effects
 
 리액트가 하는 일
 
-- UI render, react to user input
-- Evaluate & render JSX, manage State & Props
-- React to events & input
-- Re-evaluate component upon State & Prop changes
+- UI를 렌더링하고, 사용자 입력, 이벤트에 반응
+- JSX를 평가, 계산하고 렌더링, State & Props 관리
+- State & Prop이 변하면 컴포넌트 재평가
 
 <br>
 
-# Side Effects
+## Side Effects
 
 - 리액트가 하는 일을 제외한 나머지들
-- Store data in browser storage
-- Send HTTP requests to backend servers
-- Set and manage timers ...
+- 브라우저 스토리지에 데이터 저장
+- 백엔드 서버에 HTTP 요청 송신
+- 타이머 설정, 관리
 
-이 작업들은 normal component evaluation의 밖에서 일어나야 한다.
+이 작업들은 보통의 컴포넌트 평가의 밖에서 일어나야 한다.
 
 HTTP 요청에 대한 응답으로 어떤 state를 변경한다면, 무한 루프에 빠질 수 있음 -> 함수가 다시 실행될 때마다 요청을 보내면, 요청에 대한 응답으로 이 함수를 다시 트리거하는 state를 변경하게 되기 때문
 
@@ -62,8 +63,8 @@ useEffect(() => { ... }, [ dependencies ]);
 
 ```jsx
 useEffect(() => {
-  const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
-  if (storedUserLoggedInInformation === "1") {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (isLoggedIn === "1") {
     setIsLoggedIn(true);
   }
 }, []); // 빈 의존성 배열 (단 한 번만 실행)
@@ -80,23 +81,25 @@ useEffect(() => {
 모든 컴포넌트 렌더링 주기 이후에 실행되기 때문
 
 ```jsx
+useEffect(() => {}); // 배열이 없으면 렌더링마다 계속 재실행
+```
+
+```jsx
 useEffect(() => {
   setFormIsValid(
     enteredEmail.includes("@") && enteredPassword.trim().length > 6
   );
-}, [setFormIsValid, enteredEmail, enteredPassword]); // setFormIsValid 함수는 리액트에 의해 절대 변경되지 않도록
-// 보장되기 때문에 setFormIsValid는 생략 가능
+}, [setFormIsValid, enteredEmail, enteredPassword]);
+// setFormIsValid 함수는 리액트에 의해 절대 변경되지 않도록 보장되기 때문에 setFormIsValid는 생략 가능
 ```
-
-사용자 입력 데이터의 사이드 이펙트
 
 <br>
 
-# 종속성으로 추가할 항목 및 추가하지 않을 항목
+## 종속성으로 추가할 항목 및 추가하지 않을 항목
 
 effect 함수에서 사용하는 모든 것을 종속성으로 추가해야 함 -> 거기에서 사용하는 모든 상태 변수와 함수를 포함
 
-## 예외
+### 예외
 
 - 상태 업데이트 기능을 추가할 필요 (ex)setFormIsValid) (해당 함수는 리액트가 절대 변경되지 않도록 보장하기 때문에 추가할 필요 없음)
 - 내장 API 또는 함수를 추가할 필요 없음(ex)fetch(), localStorage()) (브라우저 API, 전역 기능은 리액트 구성 요소 렌더링 주기와 관련이 없으며 변경되지 않음)
@@ -133,7 +136,7 @@ const MyComponent = (props) => {
 
 <br>
 
-# Clean-Up function
+## Clean-Up function
 
 useEffect는 return할 때 클린업 할 수 있음 (함수 자체를 반환 -> 클린업 함수 반환)
 
@@ -157,7 +160,7 @@ useEffect(() => {
 
 <br>
 
-# Debouncing (그룹화)
+## Debouncing (그룹화)
 
 사용자의 입력을 잠시 기다렸다가 유효성 검사를 수행하면 더 효율적 (입력할 때마다 state 변경하면 비효율적)
 
