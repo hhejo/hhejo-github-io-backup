@@ -1,7 +1,7 @@
 ---
 title:  "Effects란? Side Effects와 useEffect 훅"
 date: 2022-02-20
-last_modified_at: 2022-02-21
+last_modified_at: 2022-02-22
 excerpt: "Effects, Side Effects, useEffect, Clean-up function"
 categories:
   - React
@@ -56,7 +56,7 @@ useEffect(() => { ... }, [ dependencies ]);
 ```
 - 지정된 의존성으로 구성된 배열
 - 지정한 의존성이 변경된 경우에만 함수 실행 (컴포넌트가 다시 렌더링될 때는 실행되지 않음)
-- 데이터 가져오기는 한 번만 실행되어야 함 (아니면 무한 루프에 빠질 수 있음)
+- 데이터 가져오기는 한 번만 실행되어야 함
 - 배열이 비어있다면 컴포넌트 함수가 처음으로 실행될 때 의존성이 변경된 것으로 간주 (의존성이 없었기 때문) -> 단 한 번만 실행. 이후로 의존성은 절대 변경되지 않기 때문
 
 첫 번째 함수에 어떤 사이드 이펙트 코드라도 넣을 수 있음. 해당 코드는 지정한 의존성이 변경된 경우에만 실행. 컴포넌트가 다시 렌더링될 때는 실행되지 않음
@@ -70,19 +70,16 @@ useEffect(() => {
 }, []); // 빈 의존성 배열 (단 한 번만 실행)
 ```
 
-의존성 배열이 useEffect에 아예 없으면 컴포넌트가 재평가될 때마다 실행
-
-그러면 useEffect의 콜백 함수가 컴포넌트 함수 바로 안으로 이동한 것과 같음
-
-의존성이 없기 때문에 해당 코드는 컴포넌트가 다시 렌더링될 때마다 다시 실행
-
-그 코드에 state를 설정하는 setState 함수가 있었다면, 재 렌더링 주기 자체를 트리거 -> 무한루프 발생
-
-모든 컴포넌트 렌더링 주기 이후에 실행되기 때문
-
 ```jsx
 useEffect(() => {}); // 배열이 없으면 렌더링마다 계속 재실행
 ```
+
+- 의존성 배열이 useEffect에 아예 없으면 컴포넌트가 재평가될 때마다 실행
+- 그러면 useEffect의 콜백 함수가 컴포넌트 함수 바로 안으로 이동한 것과 같음
+- 의존성이 없기 때문에 해당 코드는 컴포넌트가 다시 렌더링될 때마다 다시 실행
+- 그 코드에 state를 설정하는 setState 함수가 있었다면, 재 렌더링 주기 자체를 트리거 -> 무한루프 발생
+- 모든 컴포넌트 렌더링 주기 이후에 실행되기 때문
+
 
 ```jsx
 useEffect(() => {
@@ -90,7 +87,7 @@ useEffect(() => {
     enteredEmail.includes("@") && enteredPassword.trim().length > 6
   );
 }, [setFormIsValid, enteredEmail, enteredPassword]);
-// setFormIsValid 함수는 리액트에 의해 절대 변경되지 않도록 보장되기 때문에 setFormIsValid는 생략 가능
+// setFormIsValid 함수는 리액트에 의해 절대 변경되지 않도록 보장되기 때문에 생략 가능
 ```
 
 <br>
@@ -107,6 +104,8 @@ effect 함수에서 사용하는 모든 것을 종속성으로 추가해야 함 
 
 구성 요소(또는 일부 상위 구성 요소)가 다시 렌더링되어 이러한 것들이 변경될 수 있는 경우에 종속성으로 추가
 
+### 예시
+
 ```jsx
 import { useEffect, useState } from "react";
 
@@ -115,7 +114,7 @@ let myTimer;
 const MyComponent = (props) => {
   const [timerIsActive, setTimerIsActive] = useState(false);
 
-  const { timerDuration } = props; // using destructuring to pull out specific props values
+  const { timerDuration } = props;
 
   useEffect(() => {
     if (!timerIsActive) {
@@ -128,11 +127,11 @@ const MyComponent = (props) => {
 };
 ```
 
-1. `timerIsActive` 는 종속성으로 추가되었습니다. 왜냐하면 구성 요소가 변경될 때 변경될 수 있는 구성 요소 상태이기 때문이죠(예: 상태가 업데이트되었기 때문에)
-2. `timerDuration` 은 종속성으로 추가되었습니다. 왜냐하면 해당 구성 요소의 prop 값이기 때문입니다 - 따라서 상위 구성 요소가 해당 값을 변경하면 변경될 수 있습니다(이 MyComponent 구성 요소도 다시 렌더링되도록 함).
-3. `setTimerIsActive` 는 종속성으로 추가되지 않습니다. 왜냐하면예외 조건이기 때문입니다: 상태 업데이트 기능을 추가할 수 있지만 React는 기능 자체가 절대 변경되지 않음을 보장하므로 추가할 필요가 없습니다.
-4. `myTimer` 는 종속성으로 추가되지 않습니다. 왜냐하면 그것은 구성 요소 내부 변수가 아니기 때문이죠. (즉, 어떤 상태나 prop 값이 아님) - 구성 요소 외부에서 정의되고 이를 변경합니다(어디에서든). 구성 요소가 다시 평가되도록 하지 않습니다.
-5. `setTimeout` 은 종속성으로 추가되지 않습니다 왜냐하면 그것은 내장 API이기 때문입니다. (브라우저에 내장) - React 및 구성 요소와 독립적이며 변경되지 않습니다.
+1. `timerIsActive` : 구성 요소가 변경될 때 변경될 수 있는 구성 요소 상태이기 때문에 종속성으로 추가 (예) 상태가 업데이트)
+2. `timerDuration` : 해당 구성 요소의 prop 값이기 때문에 종속성으로 추가 -> 상위 구성 요소가 해당 값을 변경하면 변경될 수 있음 (이 MyComponent 구성 요소도 다시 렌더링되도록 함)
+3. `setTimerIsActive` : 예외 조건이기 때문에 종속성으로 추가하지 않음. 상태 업데이트 기능을 추가할 수 있지만 React는 기능 자체가 절대 변경되지 않음을 보장하기 때문
+4. `myTimer` : 구성 요소 내부 변수가 아니기 때문에 종속성으로 추가하지 않음. (즉, 어떤 상태나 prop 값이 아님) -> 구성 요소 외부에서 정의되고 이를 변경함(어디에서든). 구성 요소가 다시 평가되도록 하지 않음
+5. `setTimeout` : 그것은 내장 API이기 때문에 종속성으로 추가하지 않음. (브라우저에 내장) - React 및 구성 요소와 독립적이며 변경되지 않음
 
 <br>
 
@@ -145,7 +144,6 @@ useEffect는 return할 때 클린업 할 수 있음 (함수 자체를 반환 -> 
 ```jsx
 useEffect(() => {
   const identifier = setTimeout(() => {
-    console.log("Checking form validity!");
     setFormIsValid(
       enteredEmail.includes("@") && enteredPassword.trim().length > 6
     );
