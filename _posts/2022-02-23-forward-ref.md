@@ -1,7 +1,7 @@
 ---
 title:  "Forward Ref란?"
 date: 2022-02-23
-last_modified_at: 2022-02-23
+last_modified_at: 2022-02-24
 excerpt: "Forward Ref의 개념에 대해"
 categories:
   - React
@@ -141,7 +141,9 @@ const Login = () => {
 
 객체를 반환할 때 객체는 내부 함수 또는 내부 변수 또는 무엇이든 그 이름을 통해 외부에서 접근할 수 있어야 하는 것을 가리킴
 
-`React.forwardRef()`
+```jsx
+React.forwardRef()
+```
 
 ```jsx
 const Input = forwardRef((props, ref) => {
