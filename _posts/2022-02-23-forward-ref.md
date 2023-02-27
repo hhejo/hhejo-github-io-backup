@@ -1,7 +1,7 @@
 ---
 title:  "Forward Ref란?"
 date: 2022-02-23
-last_modified_at: 2022-02-26
+last_modified_at: 2022-02-27
 excerpt: "Forward Ref의 개념에 대해"
 categories:
   - React
@@ -13,9 +13,11 @@ tags:
 
 <br>
 
-## Input 재사용
+# Input 재사용
 
 `Input` 폴더 만들고 `Input.js` 만들기
+
+컴포넌트로 만들 수 있다.
 
 ```jsx
 // Input.js
@@ -76,6 +78,8 @@ const Login = () => {
   );
 };
 ```
+
+<br>
 
 # Forward Refs
 
