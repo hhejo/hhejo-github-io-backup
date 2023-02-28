@@ -1,7 +1,7 @@
 ---
 title:  "Effects란? Side Effects와 useEffect 훅"
-date: 2022-02-20
-last_modified_at: 2022-02-22
+date: 2023-02-20
+last_modified_at: 2023-02-22
 excerpt: "Effects, Side Effects, useEffect, Clean-up function"
 categories:
   - React

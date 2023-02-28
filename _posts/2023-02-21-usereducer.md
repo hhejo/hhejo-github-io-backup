@@ -1,7 +1,7 @@
 ---
 title:  "useReducer란?"
-date: 2022-02-21
-last_modified_at: 2022-02-22
+date: 2023-02-21
+last_modified_at: 2023-02-22
 excerpt: "React의 useReducer에 대해 알아봅시다. 그리고 useState와의 차이점은?"
 categories:
   - React

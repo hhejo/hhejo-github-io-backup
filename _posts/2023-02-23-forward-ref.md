@@ -1,7 +1,7 @@
 ---
 title:  "Forward Ref란?"
-date: 2022-02-23
-last_modified_at: 2022-02-27
+date: 2023-02-23
+last_modified_at: 2023-02-27
 excerpt: "Forward Ref의 개념에 대해"
 categories:
   - React

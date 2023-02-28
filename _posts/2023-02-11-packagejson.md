@@ -1,7 +1,7 @@
 ---
 title:  "npm과 package.json"
-date: 2022-02-11
-last_modified_at: 2022-02-11
+date: 2023-02-11
+last_modified_at: 2023-02-11
 excerpt: "package.json에 대해 자세히 알아보자"
 categories:
   - JavaScript

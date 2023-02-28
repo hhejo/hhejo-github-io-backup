@@ -1,7 +1,7 @@
 ---
 title:  "Node.js와 npm, Runtime"
-date: 2022-02-10
-last_modified_at: 2022-02-10
+date: 2023-02-10
+last_modified_at: 2023-02-10
 excerpt: "Node.js와 npm, Runtime이란?"
 categories:
   - JavaScript

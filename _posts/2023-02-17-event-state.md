@@ -1,7 +1,7 @@
 ---
 title:  "Event와 State"
-date: 2022-02-17
-last_modified_at: 2022-02-17
+date: 2023-02-17
+last_modified_at: 2023-02-17
 excerpt: "Event, State, useState, 사용자 입력, 여러 개의 state, state 업데이트, Lifting up"
 categories:
   - React
