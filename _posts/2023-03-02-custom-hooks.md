@@ -1,7 +1,7 @@
 ---
 title:  "Custom React Hooks"
 date: 2023-03-02
-last_modified_at: 2023-03-02
+last_modified_at: 2023-03-03
 excerpt: "커스텀 리액트 훅이란?"
 categories:
   - React
@@ -28,7 +28,7 @@ tags:
 
 `setInterval()`, `clearInterval()`
 
-```javascript
+```jsx
 // hooks/use-counter.js
 import { useState, useEffect } from "react";
 
@@ -59,7 +59,7 @@ export default useCounter;
 
 의존성 추가해야 함
 
-```javascript
+```jsx
 // components/ForwardCounter.js
 import Card from "./Card";
 import useCounter from "../hooks/use-counter";
@@ -73,7 +73,7 @@ const ForwardCounter = () => {
 export default ForwardCounter;
 ```
 
-```javascript
+```jsx
 // components/BackwardCounter.js
 import Card from "./Card";
 import useCounter from "../hooks/use-counter";
