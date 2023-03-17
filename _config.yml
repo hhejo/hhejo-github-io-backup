@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 locale                   : "ko-KR"
 title                    : "HHEJO"
 title_separator          : "-"
-subtitle                 : "어제보다 더 잘합시다"
+subtitle                 : "매일 열심히 합시다"
 name                     : "희주"
 description              : "열심히 코딩하고 기록합시다"
 url                      : "https://hhejo.github.io"
@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "희주"
   avatar           : "/assets/images/bio-photo.jpeg"
-  bio              : "상반기가 목표"
+  bio              : "안녕하세요"
   location         : "Republic of Korea"
   # email            : "litsmainjof@gmail.com"
   links:
