@@ -304,13 +304,12 @@ npm cache verify
 
 cache에서 꼬인 부분을 체크 및 해결합니다. (추천)
 
-
 <br>
 <br>
 
 # 참고
 
-> [Global objects | Node.js v20.4.0 Documentation](https://nodejs.org/api/globals.html#global)
+> [Node.js v20.4.0 Documentation](https://nodejs.org/api/globals.html#global)
 
 > [An introduction to the NPM package manager](https://nodejs.dev/en/learn/an-introduction-to-the-npm-package-manager/)
 
