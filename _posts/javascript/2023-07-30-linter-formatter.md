@@ -102,7 +102,7 @@ Successfully created .eslintrc.cjs file in /Users/hejo/Documents/my-pjt
 
 완료하면, 프로젝트 루트 폴더 내 `.eslintrc.cjs` 파일이 생성됩니다.
 
-```cjs
+```javascript
 module.exports = {
     "env": {
         "browser": true,
@@ -160,7 +160,7 @@ npx eslint src/index.js
 
 그 이유는, `.eslintrc.cjs`의 파일에서 확인할 수 있습니다. 일부분을 표시하겠습니다.
 
-```cjs
+```javascript
 module.exports = {
   env: {
     browser: true,
@@ -266,7 +266,7 @@ npm install --save-dev eslint-config-prettier
 
 `.eslintrc.cjs`의 `extends` 속성에 `'prettier'`를 맨 마지막으로 추가합니다.
 
-```cjs
+```javascript
 {
   extends: ['eslint:recommended', 'prettier'],
 }
