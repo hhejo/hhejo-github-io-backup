@@ -2,7 +2,7 @@
 title: "fs 내장 모듈을 사용해 Node.js에서 파일 다루기"
 date: 2023-08-01
 last_modified_at: 2023-08-02
-excerpt: "Node.js에서의 fs 모듈을 이용한 파일 조작 방식을 예시를 통해 알아보고, Sync 단어가 붙은 함수는 무엇이 다른지 Callback, Promise, Async-Await 방식을 모두 비교해봅니다."
+excerpt: "Node.js에서의 fs 모듈을 이용한 파일 조작 방식을 예시를 통해 알아보고, Sync 단어가 붙은 함수는 무엇이 다른지 Callback, Promise, Async-Await 방식을 모두 비교해봅니다. 그리고 파일을 여는 또다른 함수, open은 무엇이 다를까요?"
 categories:
   - JavaScript
 tags:
@@ -109,6 +109,12 @@ try {
 ```
 
 `index.js` 파일을 실행하면, `Hello, World!`가 잘 출력됩니다.
+
+> `fs.open()`의 경우, 해당 파일에 여러 작업을 수행하는 경우 호출합니다.
+> 
+> 파일을 연 후, `fs.close()`로 닫는 작업이 추가적으로 필요합니다.
+> 
+> `fs.readFile()`, `fs.readFileSync()`는 파일을 따로 닫지 않아도 됩니다.
 
 ## 2. 파일 쓰기
 
@@ -413,5 +419,7 @@ readAllFiles();
 > [How To Work with Files using the fs Module in Node.js](https://www.digitalocean.com/community/tutorials/how-to-work-with-files-using-the-fs-module-in-node-js)
 
 > [Why is fs.readFileSync() faster than await fsPromises.readFile()?](https://stackoverflow.com/questions/63971379/why-is-fs-readfilesync-faster-than-await-fspromises-readfile)
+
+> [what is the use of fs.open() in nodejs, what is difference between fs.readfile and fs.open()](https://stackoverflow.com/questions/48928758/what-is-the-use-of-fs-open-in-nodejs-what-is-difference-between-fs-readfile-a)
 
 ---
