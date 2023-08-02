@@ -1,8 +1,8 @@
 ---
-title:  "Node.js에서 파일을 다루기"
+title: "fs 내장 모듈을 사용해 Node.js에서 파일 다루기"
 date: 2023-08-01
-last_modified_at: 2023-08-01
-excerpt: "Node.js에서의 fs 모듈을 이용한 파일 조작 방식을 예시를 통해 알아보겠습니다."
+last_modified_at: 2023-08-02
+excerpt: "Node.js에서의 fs 모듈을 이용한 파일 조작 방식을 예시를 통해 알아보고, Sync 단어가 붙은 함수는 무엇이 다른지 Callback, Promise, Async-Await 방식을 모두 비교해봅니다."
 categories:
   - JavaScript
 tags:
@@ -20,6 +20,9 @@ Node.js에서는 `fs`(file system) 모듈을 사용해 파일을 조작할 수 �
 `fs` 모듈은 동기식, 비동기식 또는 스트림을 통한 파일과의 상호작용을 지원합니다.
 
 CommonJS, ES Modules 방식 모두 지원합니다.
+
+<br>
+<br>
 
 # fs
 
@@ -72,6 +75,8 @@ try {
   // handle the error
 }
 ```
+
+이제 파일을 읽고, 쓰고, 지우고, 이동하는 방법에 대해 알아보겠습니다.
 
 ## 1. 파일 읽기
 
@@ -182,6 +187,220 @@ try {
 }
 ```
 
+## 이름에 ..Sync가 붙어있는 함수와의 차이점
+
+파일 읽기의 `readFile`, `readFileSync`
+
+파일 쓰기의 `writeFile`, `writeFileSync`
+
+`Sync`가 붙은 함수는 동기적으로 동작합니다. 붙지 않은 함수는 비동기로 동작합니다.
+
+### readFileSync
+
+`readFileSync`를 사용하면 순서대로 파일을 읽을 수 있습니다. `node:fs`에서 가져옵니다.
+
+```javascript
+// readFileSync
+import * as fs from 'node:fs';
+
+const filePath1 = './file1.txt';
+const filePath2 = './file2.txt';
+const filePath3 = './file3.txt';
+const filePath4 = './file4.txt';
+const filePath5 = './file5.txt';
+
+const data1 = fs.readFileSync(filePath1);
+const data2 = fs.readFileSync(filePath2);
+const data3 = fs.readFileSync(filePath3);
+const data4 = fs.readFileSync(filePath4);
+const data5 = fs.readFileSync(filePath5);
+
+console.log(data1.toString()); // 1
+console.log(data2.toString()); // 2
+console.log(data3.toString()); // 3
+console.log(data4.toString()); // 4
+console.log(data5.toString()); // 5
+```
+
+```
+1
+2
+3
+4
+5
+```
+
+읽은 순서대로 출력됩니다.
+
+### readFile
+
+`readFile`을 사용하면 다음과 같습니다. 편의상 에러 처리는 생략하겠습니다.
+
+```javascript
+// readFile
+import * as fs from 'node:fs';
+
+const filePath1 = './file1.txt';
+const filePath2 = './file2.txt';
+const filePath3 = './file3.txt';
+const filePath4 = './file4.txt';
+const filePath5 = './file5.txt';
+
+fs.readFile(filePath1, (err, data) => console.log(data.toString())); // 1
+fs.readFile(filePath2, (err, data) => console.log(data.toString())); // 2
+fs.readFile(filePath3, (err, data) => console.log(data.toString())); // 3
+fs.readFile(filePath4, (err, data) => console.log(data.toString())); // 4
+fs.readFile(filePath5, (err, data) => console.log(data.toString())); // 5
+```
+
+```
+1
+2
+5
+4
+3
+```
+
+순서대로 출력되지 않습니다.
+
+원하는 순서대로 출력하기 위해 콜백 함수를 사용해야 합니다.
+
+### readFile with Callback
+
+콜백 함수를 이용해 순서대로 출력해보겠습니다.
+
+```javascript
+// readFile with Callback
+import * as fs from 'node:fs';
+
+const filePath1 = './file1.txt';
+const filePath2 = './file2.txt';
+const filePath3 = './file3.txt';
+const filePath4 = './file4.txt';
+const filePath5 = './file5.txt';
+
+fs.readFile(filePath1, (err, data) => {
+  console.log(data.toString()); // 1
+  fs.readFile(filePath2, (err, data) => {
+    console.log(data.toString()); // 2
+    fs.readFile(filePath3, (err, data) => {
+      console.log(data.toString()); // 3
+      fs.readFile(filePath4, (err, data) => {
+        console.log(data.toString()); // 4
+        fs.readFile(filePath5, (err, data) => {
+          console.log(data.toString()); // 5
+        });
+      });
+    });
+  });
+});
+```
+
+```
+1
+2
+3
+4
+5
+```
+
+순서대로 출력됩니다.
+
+### readFile with Promise
+
+이번에는 프로미스 방식으로 해결해보겠습니다. `node:fs/promises`에서 가져옴에 주의합니다.
+
+```javascript
+// readFile with Promise
+import * as fs from 'node:fs/promises';
+
+const filePath1 = './file1.txt';
+const filePath2 = './file2.txt';
+const filePath3 = './file3.txt';
+const filePath4 = './file4.txt';
+const filePath5 = './file5.txt';
+
+fs.readFile(filePath1)
+  .then((data) => {
+    console.log(data.toString()); // 1
+    return fs.readFile(filePath2);
+  })
+  .then((data) => {
+    console.log(data.toString()); // 2
+    return fs.readFile(filePath3);
+  })
+  .then((data) => {
+    console.log(data.toString()); // 3
+    return fs.readFile(filePath4);
+  })
+  .then((data) => {
+    console.log(data.toString()); // 4
+    return fs.readFile(filePath5);
+  })
+  .then((data) => {
+    console.log(data.toString()); // 5
+    return;
+  });
+```
+
+```
+1
+2
+3
+4
+5
+```
+
+### readFile with Async-Await
+
+Async-Await 방식으로 바꿔보겠습니다.
+
+```javascript
+// readFile with Async-Await
+import * as fs from 'node:fs/promises';
+
+const filePath1 = './file1.txt';
+const filePath2 = './file2.txt';
+const filePath3 = './file3.txt';
+const filePath4 = './file4.txt';
+const filePath5 = './file5.txt';
+
+const readAllFiles = async () => {
+  const data1 = await fs.readFile(filePath1);
+  console.log(data1.toString()); // 1
+  const data2 = await fs.readFile(filePath2);
+  console.log(data2.toString()); // 2
+  const data3 = await fs.readFile(filePath3);
+  console.log(data3.toString()); // 3
+  const data4 = await fs.readFile(filePath4);
+  console.log(data4.toString()); // 4
+  const data5 = await fs.readFile(filePath5);
+  console.log(data5.toString()); // 5
+};
+
+readAllFiles();
+```
+
+```
+1
+2
+3
+4
+5
+```
+
+### `readFile()`을 동기식으로 쓰려고 하기 vs `readFileSync()` 그냥 쓰기
+
+`readFile()`을 위에서 실습한 것처럼,
+
+1. 콜백 함수
+2. 프로미스
+3. Async-Await
+
+세 가지 방식으로 사용해 동기식처럼 사용할 수 있습니다.
+
+그렇다면 파일의 입력 순서가 중요할 경우, `readFileSync()`를 사용해야 할까요 아니면 그냥 `readFile()`을 위의 세 가지 방법으로 동기식으로 사용해야 할까요?
+
 <br>
 <br>
 
@@ -192,5 +411,7 @@ try {
 > [Node.js File System Module](https://www.w3schools.com/nodejs/nodejs_filesystem.asp)
 
 > [How To Work with Files using the fs Module in Node.js](https://www.digitalocean.com/community/tutorials/how-to-work-with-files-using-the-fs-module-in-node-js)
+
+> [Why is fs.readFileSync() faster than await fsPromises.readFile()?](https://stackoverflow.com/questions/63971379/why-is-fs-readfilesync-faster-than-await-fspromises-readfile)
 
 ---
