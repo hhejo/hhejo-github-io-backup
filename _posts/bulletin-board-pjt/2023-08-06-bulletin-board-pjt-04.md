@@ -2,7 +2,7 @@
 title:  "React, Vite, Node.js, Express를 이용해 게시판 만들기 04"
 date: 2023-08-06
 last_modified_at: 2023-08-06
-excerpt: ""
+excerpt: "CORS, TailwindCSS, Component 분리"
 categories:
   - BulletinBoardPjt
 tags:
