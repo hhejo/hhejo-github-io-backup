@@ -1,12 +1,12 @@
 ---
 title: "macOS에서 MongoDB Community Edition을 설치하고 실행하기"
-date: 2023-08-08
-last_modified_at: 2023-08-08
-excerpt: "MongoDB를 설치하고 실행하겠습니다. 그리고 MongoDB Atlas란 무엇일까요?"
+date: 2023-08-09
+last_modified_at: 2023-08-09
+excerpt: "Homebrew를 이용해 MongoDB를 설치하고 실행하겠습니다. 그리고 MongoDB Atlas란 무엇일까요?"
 categories:
   - MongoDB
 tags:
-  - [mongodb, mongosh, brew]
+  - [mongodb, mongosh, homebrew]
 ---
 
 ---
