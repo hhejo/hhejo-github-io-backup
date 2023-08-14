@@ -1,7 +1,7 @@
 ---
 title: "MongoDB와 Mongoose"
 date: 2023-08-10
-last_modified_at: 2023-08-10
+last_modified_at: 2023-08-14
 excerpt: "MongoDB와 Mongoose 각각의 특징과 차이점을 알아보겠습니다."
 categories:
   - MongoDB
