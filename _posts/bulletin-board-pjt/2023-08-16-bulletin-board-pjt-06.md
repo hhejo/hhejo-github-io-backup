@@ -2,7 +2,7 @@
 title:  "React, Vite, Node.js, Express를 이용해 게시판 만들기 06"
 date: 2023-08-16
 last_modified_at: 2023-08-18
-excerpt: ""
+excerpt: "MongoDB 연결, Router 분리, env 분리"
 categories:
   - BulletinBoardPjt
 tags:
