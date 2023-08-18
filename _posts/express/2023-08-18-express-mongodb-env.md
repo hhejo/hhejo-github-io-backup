@@ -6,7 +6,7 @@ excerpt: "Express와 MongoDB Driver를 어떻게 연결하고, 환경변수와 �
 categories:
   - ExpressJS
 tags:
-  - [express, mongodb, env]
+  - [express, nodejs, mongodb, env]
 ---
 
 ---

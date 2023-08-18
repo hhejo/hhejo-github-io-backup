@@ -1,12 +1,12 @@
 ---
 title:  "Express.js의 응답 res.send(), res.json(), res.end()의 차이점"
 date: 2023-08-04
-last_modified_at: 2023-08-04
+last_modified_at: 2023-08-18
 excerpt: "세 메서드는 각각 어떤 차이가 있을까요?"
 categories:
   - ExpressJS
 tags:
-  - [express]
+  - [express, nodejs]
 ---
 
 ---

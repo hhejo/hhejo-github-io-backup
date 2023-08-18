@@ -1,12 +1,12 @@
 ---
 title:  "Express에서 클라이언트의 요청 데이터 처리하기"
 date: 2023-08-05
-last_modified_at: 2023-08-05
+last_modified_at: 2023-08-18
 excerpt: "요청 데이터를 처리하는 Express 미들웨어 json(), urlencoded(), text(), raw() 에대해 알아보겠습니다."
 categories:
   - ExpressJS
 tags:
-  - [express, middleware, payload, mime]
+  - [express, nodejs, middleware, payload, mime]
 ---
 
 ---

@@ -6,7 +6,7 @@ excerpt: "Router와 Controller를 분리해 현재의 로직에만 집중할 수
 categories:
   - ExpressJS
 tags:
-  - [express, mongodb, router, controller]
+  - [express, nodejs, mongodb, router, controller]
 ---
 
 ---
