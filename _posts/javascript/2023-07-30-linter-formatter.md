@@ -1,19 +1,14 @@
 ---
-title:  "Linter와 Formatter"
-date: 2023-07-30
-last_modified_at: 2023-07-30
-excerpt: "Linter와 Formatter에 대해 알아보고, 각각의 대표적인 유틸리티인 ESLint와 Prettier를 사용해보겠습니다."
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs, linter, eslint, formatter, prettier]
+title: Linter와 Formatter
+date: 2023-07-30 00:00:00 +0900
+last_modified_at: 2023-07-30 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs, linter, eslint, formatter, prettier]
 ---
 
----
+Linter와 Formatter에 대해 알아보고, 각각의 대표적인 유틸리티인 ESLint와 Prettier를 사용해보겠습니다.
 
-<br>
-
-# Linter
+## Linter
 
 린터는 코드를 분석하고 버그, 구문 오류, 문체 불일치 및 의심스러운 구조를 발견하고 개선하는 데 사용되는 도구입니다.
 
@@ -21,7 +16,7 @@ linter는 컴파일된(compiled) 언어에만 국한되지 않지만, 개발 시
 
 JavaScript용 린터에는 ESLint, JSLint, JSHint 등이 있습니다.
 
-## Linter의 장점
+### Linter의 장점
 
 - production 환경에서 적은 오류
 - 규칙을 적용해 일관되고 팀이 읽기 쉽고 편리한 유지보수
@@ -30,7 +25,7 @@ JavaScript용 린터에는 ESLint, JSLint, JSHint 등이 있습니다.
 - 보다 안전하고 성능이 뛰어난 코드
 - 코드 품질에 대해 배울 수 있는 기회
 
-## 타입 체크(Type Checks)
+### 타입 체크(Type Checks)
 
 - 구문 오류(syntax errors) 확인
 - 코드 표준 준수로 일관된 코딩 스타일 유지
@@ -38,32 +33,23 @@ JavaScript용 린터에는 ESLint, JSLint, JSHint 등이 있습니다.
   - 너무 긴 함수
   - 너무 복잡한 코드
 - 보안 검사
-- 
 
-## 정적 분석(Static Analysis)
+### 정적 분석(Static Analysis)
 
 정적 분석을 사전 실행 디버그로 볼 수 있습니다.
 
 정적 분석은 오류, 규칙 또는 규칙 준수 부족 또는 기타 잠재적인 문제를 찾는 소스 코드를 분석하는 도구를 사용하는 것으로 구성됩니다.
 
-## 린터의 예
+### 린터의 예
 
-### 정적 분석을 위한 린터
+- 정적 분석을 위한 린터
+  - StandardJS
+- 보안을 위한 린터
+  - LGTM
+- 코딩 규칙, 코딩 서식 지정을 위한 린터
+  - Prettier
 
-StandardJS
-
-### 보안을 위한 린터
-
-LGTM
-
-### 코딩 규칙, 코딩 서식 지정을 위한 린터
-
-Prettier
-
-<br>
-<br>
-
-# ESLint
+## ESLint
 
 ESLint는 자바스크립트에서 가장 인기있는 오픈 소스 린팅(linting) 유틸리티입니다.
 
@@ -89,7 +75,7 @@ npx eslint --init
 You can also run this command directly using 'npm init @eslint/config'.
 Need to install the following packages:
   @eslint/create-config@0.4.6
-Ok to proceed? (y) 
+Ok to proceed? (y)
 ✔ How would you like to use ESLint? · problems
 ✔ What type of modules does your project use? · esm
 ✔ Which framework does your project use? · none
@@ -104,38 +90,35 @@ Successfully created .eslintrc.cjs file in /Users/hejo/Documents/my-pjt
 
 ```javascript
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": "eslint:recommended",
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "rules": {
+  env: {
+    browser: true,
+    es2021: true
+  },
+  extends: "eslint:recommended",
+  overrides: [
+    {
+      env: {
+        node: true
+      },
+      files: [".eslintrc.{js,cjs}"],
+      parserOptions: {
+        sourceType: "script"
+      }
     }
-}
+  ],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module"
+  },
+  rules: {}
+};
 ```
 
 이전에 작성했던 파일을 검사해보겠습니다.
 
 ```javascript
 // src/index.js
-import 'dotenv/config';
+import "dotenv/config";
 
 const { PASSWORD } = process.env;
 console.log(`PASSWORD: ${PASSWORD}`);
@@ -164,8 +147,8 @@ npx eslint src/index.js
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
-  },
+    es2021: true
+  }
 };
 ```
 
@@ -189,23 +172,17 @@ VSCode를 사용한다면 extensions로 ESLint를 다운받아 더욱 편리하�
 
 더 많은 설정을 할 수 있지만 여기까지 해보겠습니다.
 
-<br>
-<br>
-
-# Formatter
+## Formatter
 
 Formatter는 작성한 코드를 설정된 규칙에 의해 코드 스타일을 보기 좋게 정렬하거나 수정해줍니다.
 
-## Linter와 Formatter의 차이
+### Linter와 Formatter의 차이
 
 Linter로 코드를 정적으로 분석하여 코드의 잠재적인 오류와 버그, 의심스러운 구조를 발견해 수정하거나 개선합니다.
 
 Formatter로 코드 스타일(간격, 줄바꿈, 주석 등)을 수정하거나 통일해 서식을 일관되게 유지합니다.
 
-<br>
-<br>
-
-# Prettier
+## Prettier
 
 아래 명령어로 Prettier를 설치합니다.
 
@@ -272,10 +249,7 @@ npm install --save-dev eslint-config-prettier
 }
 ```
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [What Is a Linter? Here’s a Definition and Quick-Start Guide](https://www.testim.io/blog/what-is-a-linter-heres-a-definition-and-quick-start-guide/)
 
@@ -300,5 +274,3 @@ npm install --save-dev eslint-config-prettier
 > [eslint-config-prettier - GitHub](https://github.com/prettier/eslint-config-prettier)
 
 > [prettier와 eslint를 구분해서 사용하자](https://yrnana.dev/post/2021-03-21-prettier-eslint/)
-
----

@@ -1,19 +1,14 @@
 ---
-title:  "Express에서 클라이언트의 요청 데이터 처리하기"
-date: 2023-08-05
-last_modified_at: 2023-08-18
-excerpt: "요청 데이터를 처리하는 Express 미들웨어 json(), urlencoded(), text(), raw() 에대해 알아보겠습니다."
-categories:
-  - ExpressJS
-tags:
-  - [express, nodejs, middleware, payload, mime]
+title: Express에서 클라이언트의 요청 데이터 처리하기
+date: 2023-08-05 00:00:00 +0900
+last_modified_at: 2023-08-18 00:00:00 +0900
+categories: [Express]
+tags: [express, nodejs, middleware, payload, mime]
 ---
 
----
+요청 데이터를 처리하는 Express 미들웨어 json(), urlencoded(), text(), raw() 에대해 알아보겠습니다.
 
-<br>
-
-# Request Payload
+## Request Payload
 
 클라이언트에서 Express 서버로 전송하는 요청에 데이터를 넣는 경우가 있습니다.
 
@@ -24,7 +19,7 @@ tags:
 해당 기능을 사용하지 않으면, `req.body`의 값은 `undefined`이 나오게 됩니다.
 
 ```javascript
-import express from 'express';
+import express from "express";
 
 const app = express();
 ```
@@ -106,16 +101,13 @@ x파일, 이미지를 서버로 전송할 때 주로 사용합니다.
 
 `Content-Type` 헤더와 `type` 옵션이 일치하는 요청만 처리하고, Buffer만 파싱하는 미들웨어를 리턴합니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [express()](https://expressjs.com/en/4x/api.html#express)
 
 > [express.js 에서 POST 데이터 처리하기](https://kasterra.github.io/handle-POST-data-in-express/)
 
-> [페이로드 (컴퓨팅)](https://ko.wikipedia.org/wiki/%ED%8E%98%EC%9D%B4%EB%A1%9C%EB%93%9C_(%EC%BB%B4%ED%93%A8%ED%8C%85))
+> [페이로드 (컴퓨팅)](<https://ko.wikipedia.org/wiki/%ED%8E%98%EC%9D%B4%EB%A1%9C%EB%93%9C_(%EC%BB%B4%ED%93%A8%ED%8C%85)>)
 
 > [MIME 타입](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
 
@@ -124,5 +116,3 @@ x파일, 이미지를 서버로 전송할 때 주로 사용합니다.
 > [HTTP: Content-Type 에 대해 알아보자](https://jw910911.tistory.com/117)
 
 > [HTTP multipart/form-data 란?](https://velog.io/@shin6403/HTTP-multipartform-data-%EB%9E%80)
-
----

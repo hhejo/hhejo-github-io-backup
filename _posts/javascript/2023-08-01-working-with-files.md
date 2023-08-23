@@ -1,19 +1,14 @@
 ---
-title: "fs 내장 모듈을 사용해 Node.js에서 파일 다루기"
-date: 2023-08-01
-last_modified_at: 2023-08-02
-excerpt: "Node.js에서의 fs 모듈을 이용한 파일 조작 방식을 예시를 통해 알아보고, Sync 단어가 붙은 함수는 무엇이 다른지 Callback, Promise, Async-Await 방식을 모두 비교해봅니다. 그리고 파일을 여는 또다른 함수, open은 무엇이 다를까요?"
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs, fs]
+title: fs 내장 모듈을 사용해 Node.js에서 파일 다루기
+date: 2023-08-01 00:00:00 +0900
+last_modified_at: 2023-08-02 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs, fs]
 ---
 
----
+Node.js에서의 fs 모듈을 이용한 파일 조작 방식을 예시를 통해 알아보고, Sync 단어가 붙은 함수는 무엇이 다른지 Callback, Promise, Async-Await 방식을 모두 비교해봅니다. 그리고 파일을 여는 또다른 함수, open은 무엇이 다를까요?
 
-<br>
-
-# Node.js의 파일 시스템
+## Node.js의 파일 시스템
 
 Node.js에서는 `fs`(file system) 모듈을 사용해 파일을 조작할 수 있습니다.
 
@@ -21,56 +16,53 @@ Node.js에서는 `fs`(file system) 모듈을 사용해 파일을 조작할 수 �
 
 CommonJS, ES Modules 방식 모두 지원합니다.
 
-<br>
-<br>
-
-# fs
+## fs
 
 ES Modules 방식으로 살펴보겠습니다. promise 기반의 API를 사용하기 위해 아래 선언문을 작성합니다.
 
 ```javascript
 // index.js
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 ```
 
 만약 동기식/콜백 API를 사용하고 싶다면, 아래 선언문을 작성합니다.
 
 ```javascript
-import * as fs from 'node:fs';
+import * as fs from "node:fs";
 ```
 
 프로미스 기반 작업의 예시는 아래와 같습니다. 비동기 작업이 완료되면 프로미스를 반환합니다.
 
 ```javascript
-import { unlink } from 'node:fs/promises';
+import { unlink } from "node:fs/promises";
 
 try {
-  await unlink('/tmp/hello');
-  console.log('successfully deleted /tmp/hello');
+  await unlink("/tmp/hello");
+  console.log("successfully deleted /tmp/hello");
 } catch (error) {
-  console.error('there was an error:', error.message);
+  console.error("there was an error:", error.message);
 }
 ```
 
 콜백 형식의 예시는 아래와 같습니다. 작업을 비동기적으로 호출합니다.
 
 ```javascript
-import { unlink } from 'node:fs';
+import { unlink } from "node:fs";
 
-unlink('/tmp/hello', (err) => {
+unlink("/tmp/hello", (err) => {
   if (err) throw err;
-  console.log('successfully deleted /tmp/hello');
+  console.log("successfully deleted /tmp/hello");
 });
 ```
 
 동기식 작업의 예시는 아래와 같습니다. 해당 작업이 완료될 때까지 Node.js 이벤트 루프와 추가 JavaScript 실행을 차단합니다. 예외는 즉시 발생합니다.
 
 ```javascript
-import { unlinkSync } from 'node:fs';
+import { unlinkSync } from "node:fs";
 
 try {
-  unlinkSync('/tmp/hello');
-  console.log('successfully deleted /tmp/hello');
+  unlinkSync("/tmp/hello");
+  console.log("successfully deleted /tmp/hello");
 } catch (err) {
   // handle the error
 }
@@ -96,9 +88,9 @@ ESM 방식을 사용하기 위해 `npm init -y`를 실행한 후, `package.json`
 
 ```javascript
 // index.js
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-const filePath = './hello.txt';
+const filePath = "./hello.txt";
 
 try {
   const data = await fs.readFile(filePath);
@@ -111,9 +103,9 @@ try {
 `index.js` 파일을 실행하면, `Hello, World!`가 잘 출력됩니다.
 
 > `fs.open()`의 경우, 해당 파일에 여러 작업을 수행하는 경우 호출합니다.
-> 
+>
 > 파일을 연 후, `fs.close()`로 닫는 작업이 추가적으로 필요합니다.
-> 
+>
 > `fs.readFile()`, `fs.readFileSync()`는 파일을 따로 닫지 않아도 됩니다.
 
 ## 2. 파일 쓰기
@@ -123,12 +115,12 @@ try {
 ### 예시
 
 ```javascript
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-const filePath = './book.csv';
+const filePath = "./book.csv";
 
 try {
-  const csvHeader = 'title,author,price';
+  const csvHeader = "title,author,price";
   await fs.writeFile(filePath, csvHeader);
 } catch (err) {
   console.error(err.message);
@@ -138,13 +130,13 @@ try {
 csv 파일이 없다면 새로 생성됩니다.
 
 ```javascript
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-const filePath = './book.csv';
+const filePath = "./book.csv";
 
 try {
-  const csvLine = '\nthisIsTitle,iAmAuthor,4000';
-  await fs.writeFile(filePath, csvLine, { flag: 'a' });
+  const csvLine = "\nthisIsTitle,iAmAuthor,4000";
+  await fs.writeFile(filePath, csvLine, { flag: "a" });
 } catch (err) {
   console.error(err.message);
 }
@@ -161,9 +153,9 @@ try {
 ### 예시
 
 ```javascript
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-const filePath = './hello.txt';
+const filePath = "./hello.txt";
 
 try {
   await fs.unlink(filePath);
@@ -180,10 +172,10 @@ try {
 `rename()`을 사용해 파일을 이동하거나 이름을 변경합니다.
 
 ```javascript
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-const source = './hello.txt';
-const destination = './hello2.txt';
+const source = "./hello.txt";
+const destination = "./hello2.txt";
 
 try {
   await fs.rename(source, destination);
@@ -207,13 +199,13 @@ try {
 
 ```javascript
 // readFileSync
-import * as fs from 'node:fs';
+import * as fs from "node:fs";
 
-const filePath1 = './file1.txt';
-const filePath2 = './file2.txt';
-const filePath3 = './file3.txt';
-const filePath4 = './file4.txt';
-const filePath5 = './file5.txt';
+const filePath1 = "./file1.txt";
+const filePath2 = "./file2.txt";
+const filePath3 = "./file3.txt";
+const filePath4 = "./file4.txt";
+const filePath5 = "./file5.txt";
 
 const data1 = fs.readFileSync(filePath1);
 const data2 = fs.readFileSync(filePath2);
@@ -244,13 +236,13 @@ console.log(data5.toString()); // 5
 
 ```javascript
 // readFile
-import * as fs from 'node:fs';
+import * as fs from "node:fs";
 
-const filePath1 = './file1.txt';
-const filePath2 = './file2.txt';
-const filePath3 = './file3.txt';
-const filePath4 = './file4.txt';
-const filePath5 = './file5.txt';
+const filePath1 = "./file1.txt";
+const filePath2 = "./file2.txt";
+const filePath3 = "./file3.txt";
+const filePath4 = "./file4.txt";
+const filePath5 = "./file5.txt";
 
 fs.readFile(filePath1, (err, data) => console.log(data.toString())); // 1
 fs.readFile(filePath2, (err, data) => console.log(data.toString())); // 2
@@ -277,13 +269,13 @@ fs.readFile(filePath5, (err, data) => console.log(data.toString())); // 5
 
 ```javascript
 // readFile with Callback
-import * as fs from 'node:fs';
+import * as fs from "node:fs";
 
-const filePath1 = './file1.txt';
-const filePath2 = './file2.txt';
-const filePath3 = './file3.txt';
-const filePath4 = './file4.txt';
-const filePath5 = './file5.txt';
+const filePath1 = "./file1.txt";
+const filePath2 = "./file2.txt";
+const filePath3 = "./file3.txt";
+const filePath4 = "./file4.txt";
+const filePath5 = "./file5.txt";
 
 fs.readFile(filePath1, (err, data) => {
   console.log(data.toString()); // 1
@@ -318,13 +310,13 @@ fs.readFile(filePath1, (err, data) => {
 
 ```javascript
 // readFile with Promise
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-const filePath1 = './file1.txt';
-const filePath2 = './file2.txt';
-const filePath3 = './file3.txt';
-const filePath4 = './file4.txt';
-const filePath5 = './file5.txt';
+const filePath1 = "./file1.txt";
+const filePath2 = "./file2.txt";
+const filePath3 = "./file3.txt";
+const filePath4 = "./file4.txt";
+const filePath5 = "./file5.txt";
 
 fs.readFile(filePath1)
   .then((data) => {
@@ -363,13 +355,13 @@ Async-Await 방식으로 바꿔보겠습니다.
 
 ```javascript
 // readFile with Async-Await
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-const filePath1 = './file1.txt';
-const filePath2 = './file2.txt';
-const filePath3 = './file3.txt';
-const filePath4 = './file4.txt';
-const filePath5 = './file5.txt';
+const filePath1 = "./file1.txt";
+const filePath2 = "./file2.txt";
+const filePath3 = "./file3.txt";
+const filePath4 = "./file4.txt";
+const filePath5 = "./file5.txt";
 
 const readAllFiles = async () => {
   const data1 = await fs.readFile(filePath1);
@@ -407,10 +399,7 @@ readAllFiles();
 
 그렇다면 파일의 입력 순서가 중요할 경우, `readFileSync()`를 사용해야 할까요 아니면 그냥 `readFile()`을 위의 세 가지 방법으로 동기식으로 사용해야 할까요?
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [File system](https://nodejs.org/api/fs.html)
 
@@ -421,5 +410,3 @@ readAllFiles();
 > [Why is fs.readFileSync() faster than await fsPromises.readFile()?](https://stackoverflow.com/questions/63971379/why-is-fs-readfilesync-faster-than-await-fspromises-readfile)
 
 > [what is the use of fs.open() in nodejs, what is difference between fs.readfile and fs.open()](https://stackoverflow.com/questions/48928758/what-is-the-use-of-fs-open-in-nodejs-what-is-difference-between-fs-readfile-a)
-
----
