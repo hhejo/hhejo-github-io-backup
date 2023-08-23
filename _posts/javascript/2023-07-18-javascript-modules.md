@@ -1,19 +1,14 @@
 ---
-title:  "JavaScript의 모듈 시스템 - AMD, CommonJS, UMD, ECMAScript Modules"
-date: 2023-07-18
-last_modified_at: 2023-07-20
-excerpt: "JavaScript의 모듈 시스템에 대해 알아보겠습니다."
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs, commonjs, esmodules, amd, requrejs, umd]
+title: JavaScript의 모듈 시스템 - AMD, CommonJS, UMD, ESM
+date: 2023-07-18 00:00:00 +0900
+last_modified_at: 2023-07-20 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs, commonjs, esmodules, amd, requrejs, umd]
 ---
 
----
+JavaScript의 모듈 시스템에 대해 알아보겠습니다.
 
-<br>
-
-# Module
+## Module
 
 개발하는 애플리케이션의 크기가 커지면서, 여러 개의 파일(코드)로 분리하게 되는데, 이 분리된 파일 각각을 모듈이라고 부릅니다. 하나의 클래스 혹은 함수로 구성되거나, 복수의 클래스, 함수로 구성된 라이브러리로 만들어질 수도 있습니다.
 
@@ -23,10 +18,7 @@ tags:
 
 이전 자바스크립트에서는 모듈을 사용하려면 `<script src="..."></script>` 태그를 이용해 코드를 불러들이는 방식을 사용했습니다. 그러나 이렇게 되면 네임 스페이스가 중복되어 덮어씌워질 수 있었기 때문에 코드가 길어질수록, 추가하는 파일이 많아질수록 관리가 어려워졌습니다.
 
-<br>
-<br>
-
-# AMD (Asynchronous Module Definition)
+## AMD (Asynchronous Module Definition)
 
 자바스크립트의 사양으로, 코드 모듈과 해당 종속성(dependency)을 정의하는 API를 정의하고 원하는 경우 비동기식으로 로드합니다.
 
@@ -38,27 +30,21 @@ AMD는 더 작은 자바스크립트 파일을 로드한 후, 필요할 때만 �
 
 `exports`, `require()`, `define()` 구문을 이용합니다.
 
-## 예시
+### 예시
 
 ```html
 <script src="require.js"></script>
 ```
 
 ```javascript
-define(['require', 'dependency'], function(require, factory) {});
+define(["require", "dependency"], function (require, factory) {});
 ```
 
-<br>
-<br>
-
-# UMD
+### UMD
 
 모듈을 사용하는 방식이 나뉘어져 있기 때문에, 많이 사용하는 CommonJS, AMD 두 모듈 시스템을 통합해 호환시키려 하는 하나의 디자인 패턴입니다.
 
-<br>
-<br>
-
-# CommonJS
+## CommonJS
 
 CommonJS는 자바스크립트를 웹 브라우저에서만이 아니라, 웹 브라우저 외부(웹 서버, 데스크탑 애플리케이션)에서 자바스크립트용 모듈 생태계를 표준화하는 프로젝트입니다.
 
@@ -72,7 +58,7 @@ ESM 모듈 사양과 더불어 널리 쓰이는 모듈 시스템입니다.
 
 `.cjs` 파일 확장자로 명시적으로 CommonJS를 사용한다는 것을 나타냅니다. Node.js에서는 기본적으로 CommonJS 방식을 사용하므로, `.js` 확장자로 모듈을 작성해도 괜찮습니다.
 
-## 예시
+### 예시
 
 `module`을 출력해보겠습니다.
 
@@ -105,15 +91,15 @@ Module {
 
 ```javascript
 // index.js
-const A = require('./a.js');
+const A = require("./a.js");
 A();
 
-const B = require('./b.js');
+const B = require("./b.js");
 console.log(B.bb);
 
 // a.js
 const a = () => {
-  console.log('This is a');
+  console.log("This is a");
 };
 
 module.exports = a;
@@ -124,10 +110,7 @@ const b = 4;
 exports.bb = b;
 ```
 
-<br>
-<br>
-
-# ECMAScript Modules (ESM, ES Modules)
+## ECMAScript Modules (ESM, ES Modules)
 
 ES2015에서 발표된 표준 모듈 시스템입니다.
 
@@ -173,12 +156,12 @@ ES2015에서 발표된 표준 모듈 시스템입니다.
 
 모듈 스크립트는 항상 지연 실행됩니다. 외부, 인라인 스크립트와 관계 없이 `defer` 속성을 붙인 것처럼 실행됩니다. 따라서 모듈 스크립트는 항상 완전한 HTML 페이지를 볼 수 있습니다.
 
-## 예시
+### 예시
 
 ```javascript
 // index.js
-import a from './a.js';
-import { b } from './b.js';
+import a from "./a.js";
+import { b } from "./b.js";
 
 console.log(a, b);
 
@@ -197,10 +180,7 @@ export const b = 20;
 <script type="module" src="my-module.js"></>
 ```
 
-<br>
-<br>
-
-# global
+## global
 
 브라우저에서 최상위 scope는 전통적으로 global scope입니다. 즉,
 
@@ -212,10 +192,7 @@ var something;
 
 Node.js에서 CJS든 ESM이든 최상위 scope는 전역 scope가 아닙니다. 위 코드를 Node.js에서는 해당 모듈의 local 변수를 나타낼 것입니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [모듈 소개](https://ko.javascript.info/modules-intro)
 
@@ -239,6 +216,4 @@ Node.js에서 CJS든 ESM이든 최상위 scope는 전역 scope가 아닙니다. 
 
 > [Using ES modules in Node.js](https://blog.logrocket.com/es-modules-in-node-today/)
 
-> [Global objects | Node.js v20.4.0 Documentation](https://nodejs.org/api/globals.html#global)
-
----
+> [Global objects Node.js v20.4.0 Documentation](https://nodejs.org/api/globals.html#global)

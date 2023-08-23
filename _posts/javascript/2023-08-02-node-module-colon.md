@@ -1,19 +1,14 @@
 ---
-title: "모듈의 node:는 무엇일까요?"
-date: 2023-08-02
-last_modified_at: 2023-08-02
-excerpt: "모듈 중에 node:가 이름 앞에 붙는 경우가 있는데 무엇인지 알아보겠습니다."
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs, fs]
+title: 모듈의 node:는 무엇일까요?
+date: 2023-08-02 00:00:00 +0900
+last_modified_at: 2023-08-02 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs, fs]
 ---
 
----
+모듈 중에 node:가 이름 앞에 붙는 경우가 있는데 무엇인지 알아보겠습니다.
 
-<br>
-
-# `fs` v `node:fs`
+## `fs`, `node:fs`
 
 코딩을 하던 중에 궁금해졌습니다.
 
@@ -37,13 +32,8 @@ Node.js의 핵심 모듈은 Node.js 소스 내에서 정의되며, 폴더(`lib/`
 
 예를 들어, `require.cache` 엔트리에 해당 이름이 있더라도, `require('node:http')`는 항상 내장 HTTP 모듈을 반환합니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [What are the `node:fs`, `node:path` etc. modules?](https://stackoverflow.com/questions/67554506/what-are-the-nodefs-nodepath-etc-modules)
 
 > [Core modules](https://nodejs.org/api/modules.html#core-modules)
-
----

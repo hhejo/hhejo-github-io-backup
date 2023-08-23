@@ -1,19 +1,14 @@
 ---
-title:  "nodemon과 Babel로 Node.js 프로젝트 초기 세팅"
-date: 2023-07-21
-last_modified_at: 2023-07-22
-excerpt: "Node.js 프로젝트를 간단하게 시작하기 위해 필요한 것들을 정리했습니다."
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs, nodemon, babel]
+title: nodemon과 Babel로 Node.js 프로젝트 초기 세팅
+date: 2023-07-21 00:00:00 +0900
+last_modified_at: 2023-07-22 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs, nodemon, babel]
 ---
 
----
+Node.js 프로젝트를 간단하게 시작하기 위해 필요한 것들을 정리했습니다.
 
-<br>
-
-# Node.js
+## Node.js
 
 폴더부터 생성하겠습니다.
 
@@ -45,7 +40,7 @@ touch index.js
 index.js 파일에 코드를 작성합니다.
 
 ```javascript
-console.log('hello world');
+console.log("hello world");
 ```
 
 프로젝트 루트 디렉터리로 다시 이동해 코드를 실행합니다.
@@ -92,10 +87,7 @@ hello world
 ---package.json
 ```
 
-<br>
-<br>
-
-# nodemon
+## nodemon
 
 우리가 현재 개발을 하면, 코드를 작성하고 수정하게 되는데, 이를 저장하고 다시 실행해야 합니다.
 
@@ -138,8 +130,8 @@ hello world
 index.js 파일의 내용을 수정하고 저장하면, 바뀐 내용이 적용되어 자동으로 재실행되는 것을 확인할 수 있습니다.
 
 ```javascript
-console.log('hello word');
-console.log('wow'); // 새로 추가된 코드
+console.log("hello word");
+console.log("wow"); // 새로 추가된 코드
 ```
 
 ```
@@ -178,10 +170,7 @@ Completed running 'src/index.js'
 
 하지만 여기서는 nodemon을 이용하도록 하겠습니다.
 
-<br>
-<br>
-
-# Babel
+## Babel
 
 Node.js에서 최신 JS 문법을 사용하면서, 구버전의 브라우저에서도 호환이 되는 코드를 작성하려면, Babel을 사용합니다. Babel을 사용해 CommonJS 방식이 기본인 Node.js에 ES Modules 방식을 적용할 수도 있습니다.
 
@@ -240,7 +229,7 @@ npx babel src --out-dir dist
 
 ```javascript
 // src/index.js
-import { a } from './a';
+import { a } from "./a";
 
 console.log(a);
 ```
@@ -250,7 +239,7 @@ console.log(a);
 export const a = 10;
 ```
 
-아래는 에러가 발생합니다. 
+아래는 에러가 발생합니다.
 
 ```bash
 node src/index.js
@@ -298,10 +287,7 @@ npx babel-node src/index.js
 ---package.json
 ```
 
-<br>
-<br>
-
-# 결론
+## 결론
 
 파일을 수정하고 다시 시작하는 번거로움을 없애기 위해 nodemon을 사용해 파일 수정시 실행 재시작을 자동화했고, 최신 JS 문법 (ESM 등) 적용을 위해 babel을 사용해 개발 중에는 최신 문법을 사용하고 결과물은 구 버전 브라우저 등에 호환 되도록 트랜스파일했습니다.
 
@@ -314,16 +300,11 @@ npx babel-node src/index.js
 단, `import` 문 작성시에 파일 확장자까지 명시해야합니다. (브라우저와의 호환을 위해) 또한, 모듈 파일의 확장자는 `.mjs`로 명시함으로써 해당 파일이 모듈로 동작한다는 것을 알리는 것이 권장됩니다.
 
 ```javascript
-import { a } from './a.mjs';
+import { a } from "./a.mjs";
 ```
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [nodemon - npm](https://www.npmjs.com/package/nodemon)
 
 > [The minimal Node.js with Babel Setup](https://www.robinwieruch.de/minimal-node-js-babel-setup/)
-
----

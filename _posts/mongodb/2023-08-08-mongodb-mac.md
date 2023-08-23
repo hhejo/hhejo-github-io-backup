@@ -1,19 +1,14 @@
 ---
-title: "macOS에서 MongoDB Community Edition을 설치하고 실행하기"
-date: 2023-08-09
-last_modified_at: 2023-08-09
-excerpt: "Homebrew를 이용해 MongoDB를 설치하고 실행하겠습니다. 그리고 MongoDB Atlas란 무엇일까요?"
-categories:
-  - MongoDB
-tags:
-  - [mongodb, mongosh, homebrew]
+title: macOS에서 MongoDB Community Edition을 설치하고 실행하기
+date: 2023-08-09 00:00:00 +0900
+last_modified_at: 2023-08-09 00:00:00 +0900
+categories: [MongoDB]
+tags: [mongodb, mongosh, homebrew]
 ---
 
----
+Homebrew를 이용해 MongoDB를 설치하고 실행하겠습니다. 그리고 MongoDB Atlas란 무엇일까요?
 
-<br>
-
-# MongoDB Community Edition 설치
+## MongoDB Community Edition 설치
 
 현재 프로젝트의 DB로 MongoDB를 사용하기 위해 MongoDB Community Edition을 설치하겠습니다.
 
@@ -29,10 +24,7 @@ brew update
 brew install mongodb-community@6.0
 ```
 
-<br>
-<br>
-
-# 실행, 중단, 확인 명령어
+## 실행, 중단, 확인 명령어
 
 MongoDB 서비스를 아래 명령어로 실행합니다.
 
@@ -69,7 +61,7 @@ Name              Status  User File
 mongodb-community started hejo ~/Library/LaunchAgents/homebrew.mxcl.mongodb-community.plist
 ```
 
-## 에러 발생
+### 에러 발생
 
 제가 예전에 다른 프로젝트 때문에 MongoDB를 설치한 적이 있어서인지 잘 모르겠지만, 한 에러가 있었습니다.
 
@@ -98,10 +90,7 @@ srwx------  1 hejo  wheel  0  8  8 16:39 /tmp/mongodb-27017.sock
 
 잘 해결 되었습니다.
 
-<br>
-<br>
-
-# MongoDB 사용
+## MongoDB 사용
 
 MongoDB 서비스를 실행한 후, MongoDB를 사용하려면 아래 명령어를 입력합니다.
 
@@ -124,13 +113,10 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
    2023-08-08T16:39:18.427+09:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
 ------
 
-test> 
+test>
 ```
 
-<br>
-<br>
-
-# MongoDB Atlas?
+## MongoDB Atlas?
 
 MongoDB 홈페이지에서 설정을 시작하려고 문서를 보면, MongoDB Atlas를 사용하라고 나와있는데, 이것이 뭔지 찾아보다가 알게 된 내용입니다.
 
@@ -142,11 +128,6 @@ MongoDB Atlas는 클라우드 데이터베이스와 데이터 서비스가 통�
 
 서비스 사진들을 보면 확실히 쓰기 좋아보이긴 합니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [Install MongoDB Community Edition on macOS](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
-
----

@@ -1,19 +1,15 @@
 ---
-title:  "React, Vite, Node.js, Express를 이용해 게시판 만들기 06"
-date: 2023-08-16
-last_modified_at: 2023-08-18
-excerpt: "MongoDB 연결, Router 분리, env 분리"
-categories:
-  - BulletinBoardPjt
+title: React, Vite, Node.js, Express를 이용해 게시판 만들기 06
+date: 2023-08-16 00:00:00 +0900
+last_modified_at: 2023-08-18 00:00:00 +0900
+categories: [BulletinBoardPjt]
 tags:
-  - [pjt, javascript, nodejs, express, react, mongodb, route, env]
+  [bulletin-board-pjt, javascript, nodejs, express, react, mongodb, route, env]
 ---
 
----
+MongoDB 연결, Router 분리, env 분리
 
-<br>
-
-# Server
+## Server
 
 mongoDB를 연결하는 코드를 작성하니, 점점 `app.js`의 코드 길이가 늘어나 슬슬 가독성이 떨어졌습니다.
 
@@ -35,21 +31,21 @@ mongoDB 연결 코드를 `app.js`에 다 넣었다가, 어떻게 분리할 방�
 
 ```javascript
 // app.js
-import express from 'express';
-import cors from 'cors';
-import { PORT } from './load-environment';
-import boardRouter from './routes/board';
+import express from "express";
+import cors from "cors";
+import { PORT } from "./load-environment";
+import boardRouter from "./routes/board";
 
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
-  optionsSuccessStatus: 200,
+  origin: "http://localhost:5173",
+  optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/api/board', boardRouter);
+app.use("/api/board", boardRouter);
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 ```
 
@@ -58,12 +54,12 @@ app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 환경변수 세팅하는 부분을 따로 모듈로 작성했습니다.
 
 ```javascript
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 
 export const { PORT } = process.env;
-export const { MONGODB_URI } = process.env || '';
+export const { MONGODB_URI } = process.env || "";
 export const { MONGODB_DB_NAME } = process.env;
 ```
 
@@ -72,8 +68,8 @@ export const { MONGODB_DB_NAME } = process.env;
 DB에 연결하는 부분을 따로 작성합니다.
 
 ```javascript
-import { MongoClient } from 'mongodb';
-import { MONGODB_URI, MONGODB_DB_NAME } from './load-environment';
+import { MongoClient } from "mongodb";
+import { MONGODB_URI, MONGODB_DB_NAME } from "./load-environment";
 
 const client = new MongoClient(MONGODB_URI);
 const db = client.db(MONGODB_DB_NAME);
@@ -90,42 +86,36 @@ Board 관련 로직을 작성했습니다.
 깃허브 링크에서 누락되지 않은 코드를 확인할 수 있습니다.
 
 ```javascript
-import express from 'express';
-import db from '../conn.mjs';
+import express from "express";
+import db from "../conn.mjs";
 
-let tempDB = ['hi'];
+let tempDB = ["hi"];
 
 const router = express.Router();
 
 // /api/board
-router.get('', async (req, res) => {});
+router.get("", async (req, res) => {});
 
 // /api/board
-router.post('', (req, res) => {});
+router.post("", (req, res) => {});
 
 // /api/board/:boardId
-router.get('/:boardId', (req, res) => {});
+router.get("/:boardId", (req, res) => {});
 
 // /api/board/:boardId
-router.put('/:boardId', (req, res) => {});
+router.put("/:boardId", (req, res) => {});
 
 // /api/board/:boardId
-router.delete('/:boardId', (req, res) => {});
+router.delete("/:boardId", (req, res) => {});
 
 export default router;
 ```
 
-<br>
-<br>
-
-# Client
+## Client
 
 Server 부분만 진행했습니다.
 
-<br>
-<br>
-
-# 느낀점
+## 느낀점
 
 어떻게 MongoDB에 연결할 수 있을지 알아봤습니다.
 
@@ -141,11 +131,6 @@ DB 연결하는 부분이 비동기인지 동기인지 헷갈렸는데, 서버�
 
 코드는 진행하면서 더 다듬을 예정입니다.
 
-<br>
-<br>
-
-# 현재까지의 진행 사항의 소스 코드
+## 현재까지 진행 사항의 소스 코드
 
 > [bulletin-board-pjt](https://github.com/hhejo/bulletin-board-pjt/tree/73053e1b5e684792298e99582f9f52ecb6e2bb0a)
-
----

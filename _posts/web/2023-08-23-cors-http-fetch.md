@@ -1,19 +1,14 @@
 ---
-title: "CORS 에러를 어떻게 해결하는지 알아보기"
-date: 2023-08-23
-last_modified_at: 2023-08-23
-excerpt: "HTTP 모듈, Fetch API를 이용해 CORS 에러를 만들어보고, 어떻게 해결할 수 있을지 알아보겠습니다."
-categories:
-  - Web
-tags:
-  - [web, cors, http, fetch]
+title: CORS 에러를 어떻게 해결하는지 알아보기
+date: 2023-08-23 00:00:00 +0900
+last_modified_at: 2023-08-23 00:00:00 +0900
+categories: [Web]
+tags: [web, cors, http, fetch]
 ---
 
----
+HTTP 모듈, Fetch API를 이용해 CORS 에러를 만들어보고, 어떻게 해결할 수 있을지 알아보겠습니다.
 
-<br>
-
-# CORS
+## CORS
 
 fetch로 요청을 보낼 사이트가 현재 접속 사이트와 다르면 요청이 실패할 수 있습니다.
 
@@ -28,19 +23,19 @@ fetch로 요청을 보낼 사이트가 현재 접속 사이트와 다르면 요�
 ```javascript
 // server.js
 // http://localhost:3000
-const http = require('node:http');
+const http = require("node:http");
 
 const server = http.createServer();
 
-server.on('request', (req, res) => {
+server.on("request", (req, res) => {
   const statusCode = 200;
   const headers = {
-    'Content-Type': 'application/json;charset=UTF-8',
-    'Content-Language': 'ko',
+    "Content-Type": "application/json;charset=UTF-8",
+    "Content-Language": "ko"
   };
   res.writeHead(statusCode, headers);
 
-  const data = { hello: 'Hi, hi' };
+  const data = { hello: "Hi, hi" };
   const jsonData = JSON.stringify(data);
   res.end(jsonData);
 });
@@ -65,12 +60,12 @@ server.listen(3000, () => {
   </body>
   <script>
     const runFetch = async () => {
-      const url = 'http://localhost:3000';
+      const url = "http://localhost:3000";
       const headers = {
-        Accept: 'application/json',
-        'Accept-Language': 'ko',
+        Accept: "application/json",
+        "Accept-Language": "ko"
       };
-      const options = { method: 'GET', headers };
+      const options = { method: "GET", headers };
       const response = await fetch(url, options);
     };
     runFetch();
@@ -86,10 +81,7 @@ server.listen(3000, () => {
 Access to fetch at 'http://localhost:3000/' from origin 'http://127.0.0.1:5500' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
-<br />
-<br />
-
-# Safe request
+## Safe request
 
 Cross-Origin Request는 안전한 요청(safe request)과 그 이외의 안전한 요청이 아닌 요청으로 나뉩니다.
 
@@ -104,10 +96,7 @@ Cross-Origin Request는 안전한 요청(safe request)과 그 이외의 안전�
 
 두 가지 조건 모두를 충족하지 못하는 요청은 안전하지 않은 요청(unsafe request)가 됩니다.
 
-<br>
-<br>
-
-# 과정과 해결
+## 과정과 해결
 
 Cross-Origin 요청을 보낼 경우, 브라우저는 `Origin`이라는 헤더를 추가합니다.
 
@@ -128,21 +117,21 @@ Cross-Origin 요청을 보낼 경우, 브라우저는 `Origin`이라는 헤더�
 ```javascript
 // server.js
 // http://localhost:3000
-const http = require('node:http');
+const http = require("node:http");
 
 const server = http.createServer();
 
-server.on('request', (req, res) => {
+server.on("request", (req, res) => {
   const statusCode = 200;
   const headers = {
-    'Content-Type': 'application/json;charset=UTF-8',
-    'Content-Language': 'ko',
-    'Access-Control-Allow-Origin': 'http://127.0.0.1:5500', // 추가
+    "Content-Type": "application/json;charset=UTF-8",
+    "Content-Language": "ko",
+    "Access-Control-Allow-Origin": "http://127.0.0.1:5500" // 추가
     // 'Access-Control-Allow-Origin': '*', // 이것도 가능
   };
   res.writeHead(statusCode, headers);
 
-  const data = { hello: 'Hi, hi' };
+  const data = { hello: "Hi, hi" };
   const jsonData = JSON.stringify(data);
   res.end(jsonData);
 });
@@ -154,11 +143,6 @@ server.listen(3000, () => {
 
 서버에서 `Access-Control-Allow-Origin` 헤더를 설정하면 성공적으로 응답을 받아올 수 있습니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [CORS](https://ko.javascript.info/fetch-crossorigin)
-
----

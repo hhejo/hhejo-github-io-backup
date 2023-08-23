@@ -1,21 +1,16 @@
 ---
-title:  "React, Vite, Node.js, Express를 이용해 게시판 만들기 03"
-date: 2023-08-05
-last_modified_at: 2023-08-05
-excerpt: "게시글 임시 id, 게시글 작성 날짜와 시간, 게시글 조회, 수정, missing in props validation"
-categories:
-  - BulletinBoardPjt
-tags:
-  - [pjt, javascript, nodejs, express, react, date]
+title: React, Vite, Node.js, Express를 이용해 게시판 만들기 03
+date: 2023-08-05 00:00:00 +0900
+last_modified_at: 2023-08-05 00:00:00 +0900
+categories: [BulletinBoardPjt]
+tags: [bulletin-board-pjt, javascript, nodejs, express, react, date]
 ---
 
----
+게시글 임시 id, 게시글 작성 날짜와 시간, 게시글 조회, 수정, missing in props validation
 
-<br>
+## Server
 
-# Server
-
-## id
+### id
 
 임시 id 값을 주기 위해 `new Date().getTime()`을 사용했습니다.
 
@@ -23,17 +18,17 @@ tags:
 const id = new Date().getTime();
 ```
 
-## 게시글 작성 날짜, 시간
+### 게시글 작성 날짜, 시간
 
 `new Date().toISOString()`을 사용해 작성 날짜와 시간을 가져왔습니다.
 
 ```javascript
-const tempDateArr = new Date().toISOString().split('T');
+const tempDateArr = new Date().toISOString().split("T");
 const createdDate = tempDateArr[0];
-const createdTime = tempDateArr[1].split('.')[0];
+const createdTime = tempDateArr[1].split(".")[0];
 ```
 
-## 게시글 조회
+### 게시글 조회
 
 목록에서 게시글을 클릭하거나, 작성하거나 수정하고 게시글 상세 화면으로 넘어갈 때 임시 DB 배열에서 `find()` 메서드를 이용해 찾았습니다.
 
@@ -41,7 +36,7 @@ const createdTime = tempDateArr[1].split('.')[0];
 const matchingData = tempDB.find((el) => el.id === +boardId);
 ```
 
-## 게시글 수정
+### 게시글 수정
 
 수정할 게시글을 임시 DB 배열에서 찾기 위해 `findIndex()` 메서드를 사용했습니다.
 
@@ -49,12 +44,9 @@ const matchingData = tempDB.find((el) => el.id === +boardId);
 const idx = tempDB.findIndex((el) => el.id === +boardId);
 ```
 
-<br>
-<br>
+## Client
 
-# Client
-
-## missing in props validation
+### missing in props validation
 
 클라이언트 서버 실행은 잘 되는데, 코드 상에서 위 에러(경고?)가 발생해서 해결 방법을 찾아봤습니다.
 
@@ -68,7 +60,7 @@ rules: {
 
 다른 방법으로 prop type을 체크해주는 방법이 있습니다.
 
-## 게시글 수정
+### 게시글 수정
 
 `/board/create`의 POST 요청은 form에 작성한 게시글 생성 요청으로 만들었습니다.
 
@@ -91,9 +83,9 @@ useEffect(() => {
   }
   const getOriginalData = async () => {
     setModifyMode(true);
-    const boardId = searchParams.get('boardId');
+    const boardId = searchParams.get("boardId");
     const res = await axios.get(`${API_URL}/board/${boardId}`);
-    console.log('res:', res);
+    console.log("res:", res);
     setTitle(res.data.title);
     setContent(res.data.content);
   };
@@ -103,22 +95,12 @@ useEffect(() => {
 
 잘 설계한 것인지 잘 모르겠지만, 계속 다듬어보겠습니다.
 
-## Board, BoardList, BoardListItem
+### Board, BoardList, BoardListItem
 
 페이지는 Board, 컴포넌트는 BoardList, BoardListItem으로 나눴습니다.
 
 props를 이용해 데이터와 핸들러를 내렸습니다.
 
-<br>
-<br>
-
-# 현재까지의 진행 사항의 소스 코드
+## 현재까지 진행 사항의 소스 코드
 
 > [bulletin-board-pjt](https://github.com/hhejo/bulletin-board-pjt/tree/bfb9dff99d62450b4706d3a353dc089142ecd40e)
-
-<br>
-<br>
-
-# 참고
-
----

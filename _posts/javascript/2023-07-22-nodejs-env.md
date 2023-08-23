@@ -1,19 +1,14 @@
 ---
-title:  "Node.js의 환경변수 관리"
-date: 2023-07-22
-last_modified_at: 2023-07-29
-excerpt: "Node.js에서 환경변수를 관리하기 위한 process, .env, dotenv에 대해 알아보겠습니다."
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs, process, env, dotenv]
+title: Node.js의 환경변수 관리
+date: 2023-07-22 00:00:00 +0900
+last_modified_at: 2023-07-29 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs, process, env, dotenv]
 ---
 
----
+Node.js에서 환경변수를 관리하기 위한 process, .env, dotenv에 대해 알아보겠습니다.
 
-<br>
-
-# Command Line Applications
+## Command Line Applications
 
 명령줄에서 실행되는 애플리케이션을 의미합니다.
 
@@ -25,10 +20,7 @@ CLI (Command Line Interface) App으로도 불립니다.
 
 Node.js로 CLI App을 작성할 수 있습니다.
 
-<br>
-<br>
-
-# 환경변수 (Environment Variable)
+## 환경변수 (Environment Variable)
 
 개발, 테스트, 운영 등의 여러 환경에 애플리케이션을 배포할 때, 각 환경에 따라 다르게 설정되어야 하는 값들을 환경변수에 설정합니다.
 
@@ -119,10 +111,7 @@ Type ".help" for more information.
 
 `.env` 파일과 `dotenv` 패키지를 사용해 환경변수를 관리하는 방법에 대해 알아보겠습니다.
 
-<br>
-<br>
-
-# dotenv
+## dotenv
 
 `.env` 파일을 사용해 프로젝트의 소스 코드에서 접근할 수 있도록 Node.js의 환경변수를 설정할 수 있습니다.
 
@@ -140,20 +129,20 @@ npm install dotenv
 PASSWORD="1234"
 ```
 
-## CJS
+### CJS
 
 ```javascript
-require('dotenv').config();
+require("dotenv").config();
 
 const { PASSWORD } = process.env;
 
 console.log(`PASSWORD: ${PASSWORD}`);
 ```
 
-## ESM
+### ESM
 
 ```javascript
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -167,12 +156,12 @@ console.log(`PASSWORD: ${PASSWORD}`);
 혹은 아래와 같이 작성합니다.
 
 ```javascript
-import 'dotenv/config';
+import "dotenv/config";
 ```
 
 해당 파일을 모듈로 작동시킬 때, `dotenv`의 `config`가 선행되도록 해야합니다.
 
-## 주의
+### 주의
 
 `.env` 파일은 `.gitignore` 파일에 작성해 깃허브에 올라가지 않게 하는 것이 좋습니다.
 
@@ -180,7 +169,7 @@ import 'dotenv/config';
 .env
 ```
 
-## 예시
+### 예시
 
 아래 예시처럼 `.env` 파일을 구성할 수 있습니다.
 
@@ -191,10 +180,7 @@ CLIENT_URL = "http://localhost:3000"
 DATABASE_URL = "..."
 ```
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [Node.js에서 환경 변수 다루기 (process.env)](https://www.daleseo.com/js-node-process-env/)
 
@@ -209,5 +195,3 @@ DATABASE_URL = "..."
 > [Node.js process.env Property](https://www.geeksforgeeks.org/node-js-process-env-property/)
 
 > [Dotenv - npm](https://www.npmjs.com/package/dotenv)
-
----

@@ -1,19 +1,14 @@
 ---
-title: "MongoDB와 Mongoose"
-date: 2023-08-10
-last_modified_at: 2023-08-14
-excerpt: "MongoDB와 Mongoose 각각의 특징과 차이점을 알아보겠습니다."
-categories:
-  - MongoDB
-tags:
-  - [mongodb, mongoose]
+title: MongoDB와 Mongoose
+date: 2023-08-10 00:00:00 +0900
+last_modified_at: 2023-08-14 00:00:00 +0900
+categories: [MongoDB]
+tags: [mongodb, mongoose]
 ---
 
----
+MongoDB와 Mongoose 각각의 특징과 차이점을 알아보겠습니다.
 
-<br>
-
-# Mongoose
+## Mongoose
 
 Node.js 기반의 MongoDB의 ODM(Object Data Modeling) 라이브러리입니다.
 
@@ -26,10 +21,7 @@ Node.js 기반의 MongoDB의 ODM(Object Data Modeling) 라이브러리입니다.
 
 전통적인 SQL 데이터베이스를 위한 ORM(Object Relational Mapper)인 SQLAlchemy와 유사합니다.
 
-<br>
-<br>
-
-# MongoDB에서의 Object Data Modeling
+## MongoDB에서의 Object Data Modeling
 
 MongoDB와 같은 NoSQL을 사용하면 엄격한 데이터 모델에 구속되지 않고 유연하게 필드를 추가하고 제거할 수 있지만, 데이터 모델에 대한 합의가 없고 collection의 모든 document에 서로 매우 다른 필드가 포함된다면 문제가 될 수 있습니다.
 
@@ -49,14 +41,16 @@ const blog = new Schema({
   published: Boolean,
   content: String,
   tags: [String],
-  comments: [{
+  comments: [
+    {
       user: String,
       content: String,
       votes: Number
-  }]
+    }
+  ]
 });
 
-const Blog = mongoose.model('Blog', blog);
+const Blog = mongoose.model("Blog", blog);
 ```
 
 모델이 정의되었고, 이제부터 CRUD 쿼리를 수행할 수 있습니다.
@@ -64,11 +58,11 @@ const Blog = mongoose.model('Blog', blog);
 ```javascript
 // Mongoose
 const article = new Blog({
-  title: 'Awesome Post!',
-  slug: 'awesome-post',
+  title: "Awesome Post!",
+  slug: "awesome-post",
   published: true,
-  content: 'This is the best post ever',
-  tags: ['featured', 'announcement'],
+  content: "This is the best post ever",
+  tags: ["featured", "announcement"]
 });
 
 article.save();
@@ -86,13 +80,13 @@ Blog.findOne({}, (err, post) => console.log(post));
 
 ```javascript
 // MongoDB
-db.collection('posts').insertOne({
-  title: 'Better Post!',
-  slug: 'a-better-post',
+db.collection("posts").insertOne({
+  title: "Better Post!",
+  slug: "a-better-post",
   published: true,
-  author: 'Ado Kukic',
-  content: 'This is an even better post',
-  tags: ['featured'],
+  author: "Ado Kukic",
+  content: "This is an even better post",
+  tags: ["featured"]
 });
 ```
 
@@ -109,9 +103,11 @@ function Blog(post) {
 
 ```javascript
 // MongoDB
-db.collection('posts').findOne({}).then((err, post) => {
-  let article = new Blog(post);
-});
+db.collection("posts")
+  .findOne({})
+  .then((err, post) => {
+    let article = new Blog(post);
+  });
 ```
 
 ## Schema Validation
@@ -136,23 +132,23 @@ MongoDB schema 유효성 검사는 DB 수준에서 적용된다는 것이 큰 �
 // Mongoose
 const blog = new Schema({
   title: {
-      type: String,
-      required: true,
+    type: String,
+    required: true
   },
   slug: {
-      type: String,
-      required: true,
+    type: String,
+    required: true
   },
   published: Boolean,
   content: {
-      type: String,
-      required: true,
-      minlength: 250
-  },
+    type: String,
+    required: true,
+    minlength: 250
+  }
   // ...
 });
 
-const Blog = mongoose.model('Blog', blog);
+const Blog = mongoose.model("Blog", blog);
 ```
 
 ### MongoDB Node.js 드라이버에서 유효성 검사
@@ -233,31 +229,34 @@ MongoDB에서는 `$lookup`을 이용해 단일 DB 내의 collection에 대해 le
 
 ```javascript
 // MongoDB
-Blog.
-  findOne({}).
-  populate('comments.user').
-  exec(function (err, post) {
-      console.log(post.comments[0].user.name);
+Blog.findOne({})
+  .populate("comments.user")
+  .exec(function (err, post) {
+    console.log(post.comments[0].user.name);
   });
 ```
 
 ```javascript
 // MongoDB
-db.collection('posts').aggregate([
-  {
-    '$lookup': {
-      'from': 'users', 
-      'localField': 'comments.user', 
-      'foreignField': '_id', 
-      'as': 'users'
-    }
-  }, {}
-], (err, post) => {
-  console.log(post.users);
-});
+db.collection("posts").aggregate(
+  [
+    {
+      $lookup: {
+        from: "users",
+        localField: "comments.user",
+        foreignField: "_id",
+        as: "users"
+      }
+    },
+    {}
+  ],
+  (err, post) => {
+    console.log(post.users);
+  }
+);
 ```
 
-# 결론
+## 결론
 
 MongoDB는 스키마 없이 유연하게 데이터를 저장하고, 데이터 구조에 대한 제한이 적어 유연성이 높습니다.
 
@@ -269,10 +268,7 @@ Mongoose는 스키마 기반 접근 방식으로 높은 수준의 추상화 계�
 
 하지만 DB와 상호작용하는 오버헤드가 증가하고, 데이터 모델의 유연성이 제한됩니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [MongoDB & Mongoose: Compatibility and Comparison](https://www.mongodb.com/developer/languages/javascript/mongoose-versus-nodejs-driver/)
 
@@ -281,5 +277,3 @@ Mongoose는 스키마 기반 접근 방식으로 높은 수준의 추상화 계�
 > [Specify JSON Schema Validation](https://www.mongodb.com/docs/manual/core/schema-validation/specify-json-schema/)
 
 > [Data Modeling Introduction](https://www.mongodb.com/docs/manual/core/data-modeling-introduction/)
-
----

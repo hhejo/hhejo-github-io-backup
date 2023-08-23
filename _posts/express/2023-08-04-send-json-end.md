@@ -1,22 +1,17 @@
 ---
-title:  "Express.js의 응답 res.send(), res.json(), res.end()의 차이점"
-date: 2023-08-04
-last_modified_at: 2023-08-18
-excerpt: "세 메서드는 각각 어떤 차이가 있을까요?"
-categories:
-  - ExpressJS
-tags:
-  - [express, nodejs]
+title: Express.js의 응답 res.send(), res.json(), res.end()의 차이점
+date: 2023-08-04 00:00:00 +0900
+last_modified_at: 2023-08-18 00:00:00 +0900
+categories: [Express]
+tags: [express, nodejs]
 ---
 
----
+세 메서드는 각각 어떤 차이가 있을까요?
 
-<br>
-
-# Express.js의 응답
+## Express.js의 응답
 
 ```javascript
-app.get('/api/test', (req, res) => {
+app.get("/api/test", (req, res) => {
   // ... do something ...
 });
 ```
@@ -25,7 +20,7 @@ app.get('/api/test', (req, res) => {
 
 Express를 사용하여 응답을 보내는 방법에는 여러 가지가 있습니다.
 
-# res.send()
+## res.send()
 
 `res.send([body])`
 
@@ -38,14 +33,14 @@ Express를 사용하여 응답을 보내는 방법에는 여러 가지가 있습
 자동으로 설정하는 것을 방지하려면, `res.set()`으로 따로 설정해줍니다.
 
 ```javascript
-res.set('Content-Type', 'text/html');
-res.send(Buffer.from('<p>some html</p>'));
+res.set("Content-Type", "text/html");
+res.send(Buffer.from("<p>some html</p>"));
 ```
 
 JSON 데이터 전송을 위해 body에 객체를 넣으면, 응답 헤더의 `Content-Type`은 올바르게 `application/json`이 설정됩니다.
 
 ```javascript
-res.send({ hello: 'world'}); // 응답 헤더
+res.send({ hello: "world" }); // 응답 헤더
 ```
 
 ```
@@ -54,17 +49,14 @@ Content-Type: application/json; charset=utf-8
 
 그렇다면 `res.json()`은 쓰지 않아도 될까요?
 
-<br>
-<br>
-
-# res.json()
+## res.json()
 
 이 메서드는 JSON 응답을 전송합니다.
 
 > [res.json([body])](https://expressjs.com/en/4x/api.html#res.json)
 
 ```javascript
-res.send({ hello: 'world'});
+res.send({ hello: "world" });
 ```
 
 `res.send()`와 `res.json()`의 주요 차이점은 비 객체를 응답으로 전달할 때 나타납니다.
@@ -73,10 +65,7 @@ res.send({ hello: 'world'});
 
 또한, `res.json()`은 json replacer와 json space 설정을 사용합니다.
 
-<br>
-<br>
-
-# res.end
+## res.end
 
 데이터를 제공하지 않고 응답을 종료하려면 `res.end()`를 사용할 수 있습니다.
 
@@ -90,10 +79,7 @@ res.status(404).end();
 
 일부 응답 데이터를 보내고 싶다면 `res.send()`, `res.json()` 등을 사용합니다. 둘은 응답을 종료하기도 하기 때문에 `res.end()`를 명시적으로 호출할 필요가 없습니다.
 
-<br>
-<br>
-
-# 결론
+## 결론
 
 응답에 데이터를 보낼 때, `res.send()` 혹은 `res.json()`을 사용합니다.
 
@@ -103,10 +89,7 @@ res.status(404).end();
 
 `res.end()`는 보낼 데이터는 없지만 응답을 종료하고 싶을 때 사용합니다. 위 두 방식 중 하나로 응답을 보낸다면, 이 메서드는 사용할 필요가 없습니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [Difference between res.json vs res.send vs res.end in Express.js](https://medium.com/gist-for-js/use-of-res-json-vs-res-send-vs-res-end-in-express-b50688c0cddf)
 
@@ -115,5 +98,3 @@ res.status(404).end();
 > [Express res.send() vs res.json() vs res.end() 비교](https://yohanpro.com/posts/nodejs/express-response)
 
 > [res.json() vs res.send() vs res.end() in Express](https://tpiros.dev/blog/res-json-vs-res-send-vs-res-end-in-express/)
-
----

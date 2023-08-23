@@ -1,19 +1,14 @@
 ---
-title:  "npm과 package.json, 그리고 npx"
-date: 2023-07-20
-last_modified_at: 2023-07-20
-excerpt: "Node.js에서 사용되는 npm과 프로젝트 마다 항상 보게 되는 package.json에 대해 알아봅시다. 그리고 npx는 무엇일까?"
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs, npm, npx, packagejson]
+title: npm과 npx 그리고 package.json
+date: 2023-07-20 00:00:00 +0900
+last_modified_at: 2023-07-20 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs, npm, npx, packagejson]
 ---
 
----
+Node.js에서 사용되는 npm과 프로젝트 마다 항상 보게 되는 package.json에 대해 알아봅시다. 그리고 npx는 무엇일까요?
 
-<br>
-
-# npm (Node Package Manager)
+## npm (Node Package Manager)
 
 Node.js로 만든 패키지(모듈)를 설치하고 관리하는 표준 패키지 관리자입니다.
 
@@ -117,7 +112,7 @@ npm run prod
   "name": "example",
   "scripts": {
     "start": "npm run lite",
-    "lite": "lite-server" 
+    "lite": "lite-server"
   }
 }
 ```
@@ -170,10 +165,7 @@ npm list depth <number>
 
 depth 0은 패키지 이름, 1은 dependency, 2는 그 다음 dependency로 특정 depth의 패키지의 리스트를 확인합니다.
 
-<br>
-<br>
-
-# npx
+## npx
 
 npm의 5.2.0부터 추가된 도구로, npm 패키지를 설치하지 않고(임시 설치) 실행할 수 있어 npm을 더 편리하게 사용할 수 있게 합니다. Node.js로 빌드하고 npm registry를 통해 게시된 코드를 일회성으로 실행할 수 있습니다.
 
@@ -189,10 +181,7 @@ npm으로는 패키지를 설치한 후, 해당 폴더로 진입해 파일을 �
 npx <github-gist-주소>
 ```
 
-<br>
-<br>
-
-# package.json
+## package.json
 
 ```json
 {
@@ -243,9 +232,13 @@ package.json이 있다면 `npm install` 명령어로 해당 프로그램에 사�
 
 패키지에 대한 설명을 나타냅니다.
 
-### main
+### main\_
 
-패키지의 진입점(entry point)이 되는 모듈의 ID. 사용자가 foo라는 이름의 패키지를 설치하고 require("foo")를 통해 모듈을 import하면, "main"으로 지정한 모듈의 exports 객체 반환. 패키지 root의 상대경로로 지정해야 함. 지정하지 않은 경우 root 폴더의 index.js가 기본값
+패키지의 진입점(entry point)이 되는 모듈의 ID. 사용자가 foo라는 이름의 패키지를 설치하고 require("foo")를 통해 모듈을 import하면, "main"으로 지정한 모듈의 exports 객체를 반환합니다.
+
+패키지 root의 상대경로로 지정해야 합니다.
+
+지정하지 않은 경우 root 폴더의 index.js가 기본값이 됩니다.
 
 ### keywords
 
@@ -259,19 +252,13 @@ package.json이 있다면 `npm install` 명령어로 해당 프로그램에 사�
 
 배포한 패키지에 대해 패키지 사용자가 패키지를 사용하는 데 어떤 권한과 제한 사항이 있는지 명시합니다.
 
-<br>
-<br>
-
-# package-lock.json
+## package-lock.json
 
 version range 형태로 표시하는 `package.json`보다 모듈들의 버전이 정확하게 표시됩니다.
 
 `package-lock.json`이 존재하면 `npm install`은 `package.json`가 아닌 `package-lock.json`를 사용하여 `node_modules`를 생성합니다.
 
-<br>
-<br>
-
-# 버전 표현
+## 버전 표현
 
 npm은 Semantic Version에 따라 패키지를 관리합니다.
 
@@ -283,10 +270,7 @@ Major, Minor, Patch 세 가지 숫자를 조합합니다.
 4. `~` : 마이너 버전이 명시되어 있으면 패치 버전을 변경
 5. `^` : 정식 버전에서 마이너와 패치 버전을 변경
 
-<br>
-<br>
-
-# cache
+## cache
 
 패키지 설치 후 삭제하고 재설치할 때 꼬이는 문제를 방지하기 위해 알아두면 좋습니다.
 
@@ -304,10 +288,7 @@ npm cache verify
 
 cache에서 꼬인 부분을 체크 및 해결합니다. (추천)
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [Node.js v20.4.0 Documentation](https://nodejs.org/api/globals.html#global)
 
@@ -324,5 +305,3 @@ cache에서 꼬인 부분을 체크 및 해결합니다. (추천)
 > [Introducing npx: an npm package runner](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)
 
 > [npm vs npx — What’s the Difference?](https://www.freecodecamp.org/news/npm-vs-npx-whats-the-difference/)
-
----

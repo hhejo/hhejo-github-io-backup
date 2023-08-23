@@ -1,19 +1,14 @@
 ---
-title:  "Node.js란?"
-date: 2023-07-16
-last_modified_at: 2023-07-17
-excerpt: "Node.js란 무엇인가"
-categories:
-  - JavaScript
-tags:
-  - [javascript, nodejs]
+title: Node.js란?
+date: 2023-07-16 00:00:00 +0900
+last_modified_at: 2023-07-17 00:00:00 +0900
+categories: [JavaScript]
+tags: [javascript, nodejs]
 ---
 
----
+Node.js란 무엇일까요?
 
-<br>
-
-# Node.js
+## Node.js
 
 Node.js는 구글 크롬의 V8 JavaScript 엔진으로 빌드된 자바스크립트 런타임 환경(runtime environment)으로, 브라우저 밖에서 자바스크립트를 사용할 수 있게 합니다.
 
@@ -68,10 +63,7 @@ Node.js가 네트워크에서 읽기, DB 또는 파일 시스템 접근과 같�
 
 또한, 브라우저에는 파일 시스템 엑세스 기능과 같은 Node.js가 모듈을 통해 제공하는 API가 없습니다.
 
-<br>
-<br>
-
-# 참고
+## 참고
 
 > [Node.js®에 대해서](https://nodejs.org/ko/about)
 
@@ -84,5 +76,3 @@ Node.js가 네트워크에서 읽기, DB 또는 파일 시스템 접근과 같�
 > [Why Choose Node.js?](https://medium.com/selleo/why-choose-node-js-b0091ad6c3fc)
 
 > [Differences between Node.js and the Browser](https://nodejs.dev/en/learn/differences-between-nodejs-and-the-browser/)
-
----
