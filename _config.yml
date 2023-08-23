@@ -18,7 +18,7 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Hee-Joo's Dev Blog # the main title
+title: Hhejo's Dev Blog # the main title
 
 tagline: It's a blog that records what I studied # it will display as the sub-title
 
@@ -37,7 +37,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Hee-Joo Hahm
+  name: Hhejo
   email: litsmainjof@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link

@@ -22,4 +22,5 @@ package-lock.json
 assets/js/dist
 
 # heejoo
+.DS_Store
 working_working/
